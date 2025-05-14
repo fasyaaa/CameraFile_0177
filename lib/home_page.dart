@@ -51,10 +51,24 @@ class _FullPageState extends State<FullPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Dashboard"), actions: const []),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(children: []),
+      appBar: AppBar(title: const Text("Beranda")),
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton.icon(
+                    icon: const Icon(Icons.camera),
+                    label: const Text('Ambil Foto'),
+                    onPressed: _takePicture,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
