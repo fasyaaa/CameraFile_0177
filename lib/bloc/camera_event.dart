@@ -18,3 +18,6 @@ final class TapToFocus extends CameraEvent {
   final Size previewSize;
   TapToFocus(this.position, this.previewSize);
 }
+
+final class PickImageFromGallery extends CameraEvent {}
+
