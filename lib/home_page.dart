@@ -3,6 +3,7 @@ import 'package:camera_project/camera_page.dart';
 import 'package:camera_project/storage_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:image_picker/image_picker.dart';
 
 class FullPage extends StatefulWidget {
   const FullPage({super.key});
@@ -32,6 +33,18 @@ class _FullPageState extends State<FullPage> {
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text('Disimpan: ${saved.path}')));
+    }
+  }
+
+  Future<void> _pickFromGallery() async {
+    final picker = ImagePicker();
+    final picked = await picker.pickImage(source: ImageSource.gallery);
+    if (picked != null) {
+      final saved = await StorageHelper.saveImage(File(picked.path), 'gallery');
+      setState(() => _imageFile = saved);
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Disalin: ${saved.path}')));
     }
   }
 
