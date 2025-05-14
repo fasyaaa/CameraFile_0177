@@ -65,6 +65,11 @@ class _FullPageState extends State<FullPage> {
                     onPressed: _takePicture,
                   ),
                 ),
+                ElevatedButton.icon(
+                  icon: const Icon(Icons.folder),
+                  onPressed: _pickFromGallery,
+                  label: const Text('Pilih dari Galeri'),
+                ),
               ],
             ),
           ],
