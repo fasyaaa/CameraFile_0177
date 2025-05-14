@@ -96,7 +96,10 @@ class _FullPageState extends State<FullPage> {
                     },
                   ),
                 ],
-              ),
+              )
+              else
+              const Text('Belum ada gambar diambil / dipilih'),
+              const SizedBox(height: 20),
           ],
         ),
       ),
