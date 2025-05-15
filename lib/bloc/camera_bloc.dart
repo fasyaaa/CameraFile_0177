@@ -141,7 +141,7 @@ class CameraBloc extends Bloc<CameraEvent, CameraState> {
     );
   }
 
-  Future<void> _onClearSnackBar(
+  Future<void> _onClearSnackbar(
     ClearSnackbar event,
     Emitter<CameraState> emit,
   ) async {
