@@ -1,16 +1,38 @@
 import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:camera/camera.dart';
-import 'package:flutter/widgets.dart';
-import 'package:meta/meta.dart';
+import 'package:camera_project/bloc/camera_page.dart';
+import 'package:camera_project/storage/storage_helper.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 part 'camera_event.dart';
 part 'camera_state.dart';
 
 class CameraBloc extends Bloc<CameraEvent, CameraState> {
+  late final List<CameraDescription> _cameras;
+
   CameraBloc() : super(CameraInitial()) {
-    on<CameraEvent>((event, emit) {
-      // TODO: implement event handler
-    });
+    on<InitializeCamera>(_onInit);
+    on<SwitchCamera>(_onSwitch);
+    on<ToggleFlash>(_onToggleFlash);
+    on<TakePicture>(_onTakePicture);
+    on<TapToFocus>(_onTapFocus);
+    on<PickImageFromGallery>(_onPickGallery);
+    on<OpenCameraAndCapture>(_onOpenCamera);
+    on<DeleteImage>(_onDeleteImage);
+    on<ClearSnackbar>(_onClearSnackbar);
+    on<RequestPermissions>(_onRequestPermissions);
+  }
+
+  Future<void> _onInit(
+    InitializeCamera event,
+    Emitter<CameraState> emit,
+  ) async {
+    _cameras = await availableCameras();
+
+    await _setupController(0, emit);
   }
 }
